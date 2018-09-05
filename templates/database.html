@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+<!doctype html>
+<html>
+  <head>
+    {% block title %}MyBooks{% endblock %}
+    {% block head %}
+    {{ super() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% endblock %}
+  </head>
+  <body>
+      {% block content %}
+	    {%for i in data%}
+      <li>{{i.title}}</li>
+      <img src="{{url_for('static', filename='covers/' + session['username'] + '_' + i.title + '_cover' + '.jpg')}}" width="50" height="75" border="0">
+      {%endfor%}
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+        {%for i in books%}
+          <li>{{i.owner}}</li>
+        {%endfor%}
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    {% endblock %}
+  </body>
+</html>
